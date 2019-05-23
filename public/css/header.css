@@ -1,0 +1,41 @@
+header {
+    height: 30px;
+    position: sticky;
+}
+
+.none {
+    display: none;
+}
+
+.bolck {
+    display: block;
+}
+
+
+/* ----------------------------Debut style Header-------------------------------------------------------------------------- */
+
+.img_profil {
+    margin: 30px auto;
+    width: 200px;
+}
+
+.modifier {
+    display: none;
+}
+
+.img_profil:hover .modifier {
+    display: block;
+}
+
+.nav-user {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+
+/* pour permettre la visibilité de nom background: linear-gradient(rgba(0, 0, 0, 0) 71%,
+rgba(0, 0, 0, .53)); */
+
+
+/* ----------------------------Fin style Header-------------------------------------------------------------------------- */

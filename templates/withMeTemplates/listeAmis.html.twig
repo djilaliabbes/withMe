@@ -1,0 +1,28 @@
+{% if app.user %}
+    <div class="col-3">
+        <div class="list-group">
+            {% for ami in app.user.getAmis() %}
+                <a class="list-group-item" href="{{path('discussion',{id :ami.ami.id})}}">
+                    <div class="media">
+                        {% if ami.ami.image.name is defined %}
+                            <img src="{{asset('images/') ~ ami.ami.image.name}} " alt=" photo de profil ami " class="mr-3 rounded-circle" with="55px" height="55px">
+                        {% else %}
+                            <div class="mr-3 rounded-circle " height="55px" with="55px  ">
+                                <i class="fas fa-user-alt"></i>
+                            </div>
+                        {% endif %}
+
+                        <div class="media-body">
+                            <h6>{{ami.ami.username}}</h6>
+                        </div>
+                        {% for msg in msgNonLu %}
+                            {% if msg.userFrom == (ami.ami.id) %}
+                                <span class="badge badge-primary badge-pill">{{msg.count}}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

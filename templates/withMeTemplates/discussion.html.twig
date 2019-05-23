@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="row">
+        {% include "withMeTemplates/listeAmis.html.twig" %}
+        <div class="col-9">
+            <div class="card">
+                {% if error is same as(true) %}
+                    <div class="alert alert-danger" role="alert"></pre>
+                    Vous ne pouvez pas avoir une discussion avec un utilisateur inconnu
+                </div>
+            {% else %}
+                <div class="card-header">{{userTo.username}}</div>
+                <div class="card-body conversations">
+                    {% for message in messages %}
+                        <div class="row">
+                            <div class="col-md-10 {{message.userFrom.id is same as(app.user.id) ? 'offset-md-2 text-right' :'' }}">
+                                <p>
+                                    <strong>{{message.userFrom.id is same as(app.user.id)? 'Me' : message.userFrom.username}}</strong><br/>
+                                    {{message.content}}
+                                    <br/>
+                                    <span class="text-muted">Le :{{message.createdAt | date('d/m/y à h:i','Europe/Paris')}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {{form_start(formMessage)}}
+                    <button class="btn btn-success" type="submit">Send !</button>
+                    {{form_end(formMessage)}}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

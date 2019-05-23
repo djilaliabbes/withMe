@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block body  %}
+    <div class="container-fluid bg-inscription">
+
+        <div class="container ">
+            {% if app.user %}
+                <h3>Modification</h3>
+            {% else %}
+                <h3>Inscription</h3>
+            {% endif %}
+            {{form_start(form)}}
+            <div class="form-row align-items-end">
+                <div class="col-10 col-md-3">
+                    {{form_row(form.username,{'label':"Nom d'utilisateur",'attr':{'placeholder':"Nom d'utilisateur"}})}}
+                </div>
+                <div class="col-10 col-md-4">{{form_row(form.email,{'label':'Adresse email','attr':{'placeholder':'Entrer votre adresse email'}})}}
+                </div>
+                <div class="col-5 col-md-1">
+                    {{form_row(form.age)}}
+                </div>
+                <div class="col-5 col-md-2">
+                    {{form_row(form.sexe)}}</div>
+                <div class="col-10 col-md-2">
+                    {{form_row(form.tel,{'attr':{'placeholder':'Ex : 0680523652'}})}}
+                </div>
+                <div class="col-10 col-md-7">
+                    {{form_row(form.activite)}}</div>
+                <div class="col-10 col-md-5">{{form_row(form.image,{'label':'Photo'})}}</div>
+                <div class="col-10 col-md-5">
+                    {{form_row(form.password,{'label':'Mot de passe','attr':{'placeholder':'Taper votre mot de passe'}})}}
+                </div>
+                <div class="col-10 col-md-5">
+                    {{form_row(form.confirm_password,{'label':'Confirmer votr mot de passe','attr':{'placeholder':'Confirmer votre mot de passe'}})}}
+                </div>
+                <div class="col-10 col-md-2">
+                    <div class="form-group">
+                        {% if app.user %}
+                            <button class="btn btn-success" type="submit">Enregistrer</button>
+                        {% else %}
+                            <button class="btn btn-success" type="submit">Inscription</button>
+                        {% endif %}
+                    </div>
+                </div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

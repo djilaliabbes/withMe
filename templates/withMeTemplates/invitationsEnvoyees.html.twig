@@ -1,0 +1,51 @@
+<!-- Modal -->{% if app.user %}
+    <div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="invitationEnvoyer" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Invitations envoyées</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    {% for invitation in app.user.getInvitationsEnvoyer() %}
+                        <div class="col">
+                            <div class="media mb-4 ">
+                                {% if invitation.getUserInvite.image.name is defined %}
+                                    <img src="{{asset('images/') ~ invitation.getUserInvite.image.name}}" class="d-flex mr-3 rounded-circle" with="50px" height="50px" alt="photo de profil">
+                                {% else %}
+                                    <div class="d-flex mr-3 rounded-circle" height="50px" with="50px">
+                                        <i class="fas fa-user-alt"></i>
+                                    </div>
+                                {% endif %}
+                                <div class="media-body">
+                                    <h5 class="media-title">{{invitation.getUserInvite.username }}</h5>
+                                    <p class="media-text">{{asset('image/')}}
+                                        <span>Age :
+                                            {{invitation.getUserInvite.age}}
+                                            <br></span>
+                                        <div>Activité (es) :
+                                            {% for activite in invitation.getUserInvite.getActivite() %}
+                                                <br><span>{{activite.name}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="col-md-4 btn btn-danger cacher" onclick="removeInvitation({{invitation.id}})">
+                                <i class="fas fa-user-times"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

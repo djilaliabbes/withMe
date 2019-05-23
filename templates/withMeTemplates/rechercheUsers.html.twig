@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        {{form_start(formSearch)}}
+        <div class="form-row align-items-end formSearch">
+            <div class="col">
+                {{form_row(formSearch.sexe,{'label':'Sexe'})}}
+            </div>
+            <div class="col">
+                {{form_row(formSearch.age,{'label':'Âge'})}}
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <button class="btn btn-success">Rechercher</button>
+                </div>
+            </div>
+        </div>
+        {{form_end(formSearch)}}
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for user in users %}
+                {% if user is not same as(app.user) %}
+                    <div class="card h-100 col-md-3">
+                        <button class="btn btn-success cacher" onclick="envoiInvitation({{user.id}})" title="Inviter {{user.username}}">
+                            <i class="fas fa-user-plus "></i>
+                        </button>
+                        <button class="btn btn-danger cacher">
+                            <i class="fas fa-user-times "></i>
+                        </button>
+                        <div class="card-body">
+                            <div class="myback-img ">
+                                <img class="" src="https://images.pexels.com/photos/907267/pexels-photo-907267.jpeg?auto=compress&cs=tinysrgb&h=300">
+                            </div>
+                            {# <div class="myoverlay"></div> #}
+                            <div class="profile-img">
+                                <div class="borders avatar-profile">
+                                    <img src="http://placehold.it/50x50">
+                                </div>
+                            </div>
+                            <div class="profile-title">
+                                <h3>{{user.username}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

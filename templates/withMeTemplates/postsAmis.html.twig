@@ -1,0 +1,74 @@
+{% if app.user %}
+    <div class="postsScroll">
+        {{form_start(formPost)}}
+        <div>
+            {% if app.user.image.name is defined %}
+                <img src="{{asset('images/') ~ app.user.image.name}}" class="rounded-circle" with="50px" height="50px" alt="photo de profil">
+            {% elseif app.user.sexe == 'h'%}
+                <img src="{{asset('img_site/profil_default_h.png')}}" class="rounded-circle" height="50px" with="50px">
+            {% else %}
+                <img src="{{asset('img_site/profil_default.png')}}" class="rounded-circle" height="50px" with="50px">
+            {% endif %}
+        </div>
+        <div>
+            {{form_row(formPost.content,{'attr':{'placeholder':"Exprimer vous"}})}}
+            {{form_row(formPost.my_files)}}
+            <button class="btn btn-success" type="submit">Publier</button>
+            {{form_end(formPost)}}
+        </div>
+
+        {% for post in postsAmis %}
+            <!-- Button trigger modal -->
+            <div class="card mb-2">
+                <div class="card-header" id="headingOne">
+                    <div data-target="#pa{{post.id}}" data-toggle="modal">
+                        {% if post.image[0] is defined %}
+                            <img alt="" src="{{asset('imagesposts/') ~ post.image[0].name}}" class=" img-fluid">
+                        {% endif %}
+                        <div class="description" style="overflow:hidden;height:50px">
+                            {{post.content}}</div>
+                        {{post.createdAt | date('d/m/y à h:m:s','Europe/Paris')}}
+
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div aria-hidden="true" aria-labelledby="postsAmis" class="modal fade" id="pa{{post.id}}" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-lg " role="document">
+
+                        <div
+                            class="modal-content">
+                            {# -----------------------------------------------Info user post------------------------------ #}
+                            <div class="modal-header">
+                                {% if post.user.image.name is defined %}
+                                    <img src="{{asset('images/') ~ post.user.image.name}}" class="mr-3 rounded-circle" width="75px" height="75px" alt="photo user post">
+                                {% elseif post.user.sexe == 'h'%}
+                                    <img src="{{asset('img_site/profil_default_h.png')}}" class="rounded-circle" height="75px" width="75px">
+                                {% else %}
+                                    <img src="{{asset('img_site/profil_default.png')}}" class="rounded-circle" height="75px" width="75px">
+                                {% endif %}
+                                <h5 class="modal-title" id="postsAmis">{{post.user.username}}</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {# -----------------------------------------------Info user post------------------------------ #}
+                            <div class="modal-body">
+                                {{post.content}}
+                                {% for image in post.image %}
+                                    <img src="{{asset('imagesPosts/' ~ image.name)}}" class="img-fluid" alt="image post">
+                                {% endfor %}
+                            </div>
+                            <div class="modal-footer">
+                                <p class="text-muted">{{post.createdAt | date('d/m/y à h:m:s','Europe/Paris')}}
+                                </p>
+                                <button class="btn btn-primary">like</button>
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endif %}

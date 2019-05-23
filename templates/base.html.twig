@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, user-scalable=no" name="viewport">
+        <title>
+            {% block title %}WithMe
+            {% endblock %}
+        </title>
+        <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet">
+        {% block stylesheets %}
+            <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+            <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+            <link rel="stylesheet" href="{{asset('css/header.css')}}">
+            <link rel="stylesheet" href="{{asset('css/home.css')}}">
+            <link rel="stylesheet" href="{{asset('css/login.css')}}">
+            <link rel="stylesheet" href="{{asset('css/inscription.css')}}">
+            <link rel="stylesheet" href="{{asset('css/rechercheUsers.css')}}">
+
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% include "withMeTemplates/header.html.twig" %}
+            {% if app.user %}
+                {% include "withMeTemplates/invitationsEnvoyees.html.twig" %}
+                {% include "withMeTemplates/invitationsRecues.html.twig" %}
+            {% endif %}
+            {% block body %}{% endblock %}
+        </div>
+        <footer class=" bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; WithMe2019</p>
+            </div>
+        </footer>
+        {% block javascripts %}
+            <script src="{{asset('js/rechercheUsers.js')}}"></script>
+            <script src="{{asset('js/home.js')}}"></script>
+            <script src="{{asset('js/article.js')}}"></script>
+            <script src=" https://unpkg.com/axios/dist/axios.min.js "></script>
+            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

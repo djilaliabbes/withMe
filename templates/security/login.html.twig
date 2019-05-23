@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container-fluid bg-login">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 center">
+
+                    <h3>S'identifier</h3>
+                    {# action ---> chemin de la page de vérification de login  #}
+                    <form action="{{path('login')}}" method="post">
+                        <div class="form-group ">
+                            <input class="form-control " name="_username" placeholder="Votre adresse email" required type="email">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control " name="_password" placeholder="Mot de passe" required type="password">
+                        </div>
+                        <div class="form-group ">
+                            <button class=" btn btn-success" type="submit">Connection</button>
+                        </div>
+                    </form>
+                    <div>
+                        <p>Vous n'avez pas encore un compte WithMe ?<a href="{{path('inscription')}}">S'inscrire</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

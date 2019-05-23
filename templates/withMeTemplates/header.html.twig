@@ -1,0 +1,86 @@
+<header
+    class="mb-5">
+    {# ---------------------------------Début Navbar ------------------------ #}
+    <nav class="navbar navbar-expand-lg">
+        <button aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler bg-dark" data-target="#navbarColor01" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                {% if app.user %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('home')}}">
+                            {% if app.user.image.name is defined %}
+                                <img src="{{asset('images/') ~ app.user.image.name}}" class="rounded-circle" with="35px" height="35px" alt="photo de profil">
+                            {% elseif app.user.sexe == 'h'%}
+                                <img src="{{asset('img_site/profil_default_h.png')}}" class="rounded-circle" height="35px" with="35px">
+                            {% else %}
+                                <img src="{{asset('img_site/profil_default.png')}}" class="rounded-circle" height="35px" with="35px">
+                            {% endif %}
+                            <span class="">{{app.user.username}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" data-target="#invitationEnvoyer" data-toggle="modal">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge badge-primary">{{app.user.getInvitationsEnvoyer() | length}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" data-target="#invitationRecu" data-toggle="modal">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-primary">{{app.user.getInvitationsRecu() | length}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('derniere_discussion')}}">
+                            <i class="fas fa-comments"></i>
+                            <span class="badge badge-primary"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('allUsers')}}">
+                            <i class="fas fa-users"></i>
+                            <span class="badge badge-primary"></span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('blog')}}">BLOG
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link navbar-brand" href="{{path('home')}}">WithMe
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('home')}}">BOUTIQUE
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('login')}}">Connexion
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('inscription')}}">S'inscrire
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('logout')}}">Déconnexion
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+    {# ---------------------------------Fin Navbar ------------------------ #}
+</header>
