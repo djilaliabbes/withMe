@@ -29,7 +29,7 @@ class withMeController extends AbstractController
      * @Route("/",name="home")
      * @param UserRepository $userRepo
      * @param Post $post
-     * @param Request $request
+     * @param Request $request 
      * @param ObjectManager $manager
      * @param PostRepository $postRepo
      * @return void
@@ -41,7 +41,7 @@ class withMeController extends AbstractController
             return $this->redirectToRoute("blog");
             exit;
         }
-        //les nombre de messages non lu par Ami du user connecté
+        //le nombre de messages non lu par Ami du user connecté
         $msgNonLu = $messageRepository->countMsgNonLu($user);
         //les posts publier par le user connecté
         $postsUser = $postRepo->findPostUserByDate($user);
@@ -113,8 +113,13 @@ class withMeController extends AbstractController
         if (!$id) {
             //je cherche le dernier msg envoyé
             $dernierMsg = $messageRepository->findDernierMsg($user);
-            //j'obtiens le userTo de dernier msg envoyé
-            $userTo = $dernierMsg[0]->getUserTo();
+            //si j'ai un msg
+            $userTo = new User();
+            if($dernierMsg){
+                 //j'obtiens le userTo de dernier msg envoyé
+                 $userTo = $dernierMsg[0]->getUserTo();
+            }
+           
         } else {
             // je vérifie si id en get correspond à un user 
             $userTo = $userRepo->findOneBy(['id' => $id]);
@@ -255,6 +260,17 @@ class withMeController extends AbstractController
             $manager->flush();
             return new Response();
         }
+    }
+    /**
+     * @Route("/home/test")
+     *
+     * @return Response
+     */
+    public function test():Response
+    {
+        $user = $this->getUser();
+        var_dump($user);
+      //return $this->json($user);
     }
     /**
      * Undocumented function

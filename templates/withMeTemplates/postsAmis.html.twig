@@ -1,25 +1,15 @@
 {% if app.user %}
     <div class="postsScroll">
         {{form_start(formPost)}}
-        <div>
-            {% if app.user.image.name is defined %}
-                <img src="{{asset('images/') ~ app.user.image.name}}" class="rounded-circle" with="50px" height="50px" alt="photo de profil">
-            {% elseif app.user.sexe == 'h'%}
-                <img src="{{asset('img_site/profil_default_h.png')}}" class="rounded-circle" height="50px" with="50px">
-            {% else %}
-                <img src="{{asset('img_site/profil_default.png')}}" class="rounded-circle" height="50px" with="50px">
-            {% endif %}
-        </div>
-        <div>
+        <div class="recherche">
             {{form_row(formPost.content,{'attr':{'placeholder':"Exprimer vous"}})}}
             {{form_row(formPost.my_files)}}
             <button class="btn btn-success" type="submit">Publier</button>
-            {{form_end(formPost)}}
         </div>
-
+        {{form_end(formPost)}}
         {% for post in postsAmis %}
             <!-- Button trigger modal -->
-            <div class="card mb-2">
+            <div class="card mt-3">
                 <div class="card-header" id="headingOne">
                     <div data-target="#pa{{post.id}}" data-toggle="modal">
                         {% if post.image[0] is defined %}

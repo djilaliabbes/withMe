@@ -1,5 +1,6 @@
 {% if app.user %}
-    <div class="col-3">
+    <div class="col-3 liste-amis">
+        <h3 class="text-center">Amis</h3>
         <div class="list-group">
             {% for ami in app.user.getAmis() %}
                 <a class="list-group-item" href="{{path('discussion',{id :ami.ami.id})}}">

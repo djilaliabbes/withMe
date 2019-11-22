@@ -30,21 +30,24 @@
                         </button>
                         <div class="card-body">
                             <div class="myback-img ">
-                                <img class="" src="https://images.pexels.com/photos/907267/pexels-photo-907267.jpeg?auto=compress&cs=tinysrgb&h=300">
+                                <img class="" src="/images/homme.jpg" height="500">
                             </div>
                             {# <div class="myoverlay"></div> #}
                             <div class="profile-img">
-                                <div class="borders avatar-profile">
-                                    <img src="http://placehold.it/50x50">
-                                </div>
-                            </div>
-                            <div class="profile-title">
-                                <h3>{{user.username}}</h3>
-                            </div>
+                                {% if user.image.name is defined %}
+                                    <div class="borders avatar-profile"><img src="{{asset('images/') ~ user.image.name}}" with="75px" height="75px" alt="photo de profil"></div>
+                                {% elseif app.user.sexe == 'h'%}
+                                    <div class="borders avatar-profile"><img src="{{asset('img_site/profil_default_h.png')}}" height="75px" with="75px"></div>
+                                {% else %}
+                                    <img src="{{asset('img_site/profil_default.png')}}" height="75px" with="75px"></div>
+                            {% endif %}
+                        </div>
+                        <div class="profile-title">
+                            <h3>{{user.username}}</h3>
                         </div>
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-{% endblock %}
+</div>{% endblock %}

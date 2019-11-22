@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <div
             class="row">
             <!-- Articles -->
-            <div class="col-md-8">
+            <div class="col-md-9" id="">
 
                 <h1 class="my-4">Page Heading
                     <small>Secondary Text</small>
@@ -13,7 +13,7 @@
 
                 <a class="nav-link" href="{{path('blog_create')}}">Créer un article</a>
                 {% for article in articles %}
-                    <div class="card mb-4">
+                    <article class="mb-4">
                         {% if article.image.name is defined %}
                             <img src="{{asset('imagesArticles/') ~ article.image.name}}" class="img-thumbnail" width="200px" alt="photo de profil">
                         {% else %}
@@ -54,12 +54,12 @@
                                 <a class="alert-link" href="{{path('inscription')}}">S'inscrire</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 {% endfor %}
             </div>
             <!-- Sidebar Widgets Column -->
             <div
-                class="col-md-4">
+                class="col-md-3 Sidebar-Widgets">
 
                 <!-- Search Widget -->
                 <div class="card my-4">

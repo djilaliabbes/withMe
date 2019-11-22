@@ -38,13 +38,19 @@ class SecurityController extends AbstractController
             //chemin vers le dossier images
             $path = $this->getParameter('kernel.project_dir') . '/public/images';
             $image = $user->getImage();
+         
             //obtenir le file soumit par l'utilisateur
             $file = $image->getFileImage();
-            //renommer l'image 
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $image->setName($fileName);
-            //déplacer l'image dans le repertoir src/Images
-            $file->move($path, $fileName);
+            if($file){
+                 //renommer l'image 
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $image->setName($fileName);
+                //déplacer l'image dans le repertoir src/Images
+                $file->move($path, $fileName);
+            }else{
+                $user->setImage(null);
+            }
+            
             //persister et enregistrer en DB
             $manager->persist($user);
             $manager->flush();

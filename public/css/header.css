@@ -1,6 +1,16 @@
 header {
-    height: 30px;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
     position: sticky;
+    background-color: rgb(118, 118, 180);
+}
+
+header a {
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 40px;
 }
 
 .none {
